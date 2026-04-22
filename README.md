@@ -1,4 +1,4 @@
-# SpecKitLite
+# Spec Kit Lite
 
 A lightweight framework for spec-driven development using markdown + an AI
 agent. No heavyweight process, no ceremony.
@@ -185,12 +185,12 @@ the agent or by hand), then sync again:
 
 Requirement format in `spec.md`:
 
-| Priority      | Meaning                                       |
-|---------------|-----------------------------------------------|
-| **Must**      | Without this the feature doesn't make sense   |
-| **Should**    | Important, but the feature still makes sense  |
-| **Could**     | Nice-to-have extension                        |
-| **Non-goals** | Deliberately out of scope                     |
+| Priority      | Meaning                                      |
+|---------------|----------------------------------------------|
+| **Must**      | Without this the feature doesn't make sense  |
+| **Should**    | Important, but the feature still makes sense |
+| **Could**     | Nice-to-have extension                       |
+| **Non-goals** | Deliberately out of scope                    |
 
 | Status   | Meaning                 |
 |----------|-------------------------|
@@ -241,7 +241,7 @@ Removed by `/specl-sync` once the item is implemented.
 Remotely via `curl` (run from the root of your project):
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/<org>/spec-kit-lite/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/n1rmataqq/spec-kit-lite/master/install.sh | bash
 ```
 
 Or locally from a clone of this repo:

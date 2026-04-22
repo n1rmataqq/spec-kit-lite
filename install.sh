@@ -8,7 +8,7 @@
 #   - Adds docs/features/*/.plan/ to .gitignore
 #
 # Usage:
-#   curl -sSL https://raw.githubusercontent.com/<org>/spec-kit-lite/main/install.sh | bash
+#   curl -sSL https://raw.githubusercontent.com/n1rmataqq/spec-kit-lite/master/install.sh | bash
 #
 # Or locally from a clone of the repo:
 #   cd /path/to/your/project && /path/to/spec-kit-lite/install.sh
@@ -19,8 +19,8 @@ set -euo pipefail
 # Configuration
 # ──────────────────────────────────────────────────────────────
 
-REPO_URL="${SPECKITLITE_REPO:-https://github.com/<org>/spec-kit-lite}"
-REPO_BRANCH="${SPECKITLITE_BRANCH:-main}"
+REPO_URL="${SPECKITLITE_REPO:-https://github.com/n1rmataqq/spec-kit-lite}"
+REPO_BRANCH="${SPECKITLITE_BRANCH:-master}"
 RAW_BASE="${REPO_URL/github.com/raw.githubusercontent.com}/${REPO_BRANCH}"
 
 TEMPLATES_DIR="docs/features/_template"
