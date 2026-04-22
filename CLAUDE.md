@@ -41,9 +41,16 @@ When editing any command or template, preserve these — they're the contract us
 - **`[planned]` goes on list items only** — in Key components, Integration points, Data model. Never on section headers,
   never in Overview, never in Decisions, never in Extension points (those three describe intent/architecture, not
   implementation state).
-- **`/specl-sync` is code → docs, never the reverse.** It updates R statuses, `[planned]` markers, Structure, component
-  lists. It never touches requirement text, Problem, Edge cases, Non-goals, Decisions, Extension points, or existing
-  Open questions — those are human-edited only.
+- **`/specl-sync` is code → docs, never the reverse.** It has two modes, selected automatically by whether `spec.md`
+  exists:
+    - **Reconcile** (spec.md exists): updates R statuses, `[planned]` markers, Structure, component lists. Never
+      touches requirement text, Problem, Edge cases, Non-goals, Decisions, Extension points, or existing Open
+      questions — those are human-edited only.
+    - **Bootstrap** (spec.md missing): one-time scaffold for adoption on an existing codebase. Reads a code area and
+      writes a fresh `spec.md` + `tech.md` with R inferred from observed behavior (statuses `[done]` / `[wip]`, never
+      `[todo]`). Ambiguity goes into Open questions as `[NEEDS CLARIFICATION: ...]`, not into invented R. After a
+      feature is bootstrapped, subsequent `/specl-sync` runs against it reconcile and the reconcile invariants apply
+      again — the "never touches requirement text" rule kicks back in on the second invocation.
 - **Divergence detection goes into Open questions as `[NEEDS CLARIFICATION: ...]`**, not as silent edits to
   requirements.
 - **Commands share a "locate the current feature" step** (from cwd, from prompt, or ask). Keep the three wordings

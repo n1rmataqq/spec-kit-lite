@@ -31,14 +31,44 @@ docs/
 
 ## Commands
 
-| Command       | What it does                                             |
-|---------------|----------------------------------------------------------|
-| `/specl-take` | take a ticket / description — create or extend a feature |
-| `/specl-plan` | create an implementation plan for some R                 |
-| `/specl-go`   | execute a plan                                           |
-| `/specl-sync` | sync docs with code state                                |
+| Command       | What it does                                                          |
+|---------------|-----------------------------------------------------------------------|
+| `/specl-sync` | sync docs with code — or scaffold them from existing code on adoption |
+| `/specl-take` | take a ticket / description — create or extend a feature              |
+| `/specl-plan` | create an implementation plan for some R                              |
+| `/specl-go`   | execute a plan                                                        |
 
 Details and examples below.
+
+### `/specl-sync`
+
+Syntax: `/specl-sync [spec | tech | all | <feature> | <code-path>]`
+
+Usually the first command you run on an existing project: point it at
+a code path and it scaffolds `spec.md` + `tech.md` from the actual
+code. On features that already have docs, the same command reconciles.
+
+Two modes, picked automatically by whether the feature's `spec.md`
+exists:
+
+- **Bootstrap** (spec.md missing) — scaffolds initial `spec.md` and
+  `tech.md` from existing code, inferring R from observed behavior.
+  Use this when adopting SpecKitLite on a codebase that already has
+  features implemented. Runs once per feature; subsequent runs
+  reconcile.
+- **Reconcile** (spec.md exists) — syncs docs with code state: R
+  statuses, `[planned]` markers, Structure, components. Never touches
+  requirement text, Decisions, Open questions, or Extension points —
+  those are edited by hand or via chat with the agent.
+
+```
+/specl-sync              # interactive: pick feature and target
+/specl-sync modules/pdf/ # bootstrap from existing code
+/specl-sync pdf-export   # sync a specific feature
+/specl-sync spec         # reconcile, R statuses and divergence
+/specl-sync tech         # reconcile, structure + components
+/specl-sync all          # reconcile, both in turn
+```
 
 ### `/specl-take`
 
@@ -100,23 +130,40 @@ checkpoints. Never commits automatically. Optionally accepts a mode
 If the plan already has `[x]` milestones and no mode was given, the
 command will ask `continue` / `redo` / `cancel`.
 
-### `/specl-sync`
-
-Syntax: `/specl-sync [spec | tech | all]`
-
-Syncs the docs with code state: R statuses, `[planned]` markers,
-Structure, components. Does not touch requirement text, Decisions, Open
-questions, or Extension points — those are edited by hand or via chat
-with the agent.
-
-```
-/specl-sync              # asks: spec / tech / all
-/specl-sync spec         # R statuses and divergence detection
-/specl-sync tech         # structure, components, [planned] → implemented
-/specl-sync all          # both in turn
-```
-
 ## Feature lifecycle
+
+Two entry paths: **adopting** an existing codebase (bootstrap from
+code), or starting a **new feature** from scratch (take a description).
+
+### Adoption (existing codebase)
+
+```
+        existing codebase (feature implemented, no docs)
+                    │
+                    ▼
+        /specl-sync <code-path>
+                    │  (bootstrap: spec.md is missing)
+                    ▼
+        docs/features/<name>/
+                    │
+                    ├── spec.md — R inferred from code
+                    │             ([done] / [wip], never [todo])
+                    ├── tech.md — real Structure, components,
+                    │             integrations (no [planned])
+                    └── .plan/
+                    │
+                    ▼
+        review [NEEDS CLARIFICATION] + priorities in spec.md
+                    │
+                    ▼
+        feature is tracked — next change goes through the
+        new-feature flow below; /specl-sync now reconciles
+                    │
+                    ▼
+        repeat /specl-sync for the next feature
+```
+
+### New feature
 
 ```
            task / ticket / URL
