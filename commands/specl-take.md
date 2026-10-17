@@ -21,9 +21,9 @@ from scratch or appends new requirements to the existing `spec.md` /
      /specl-take Export document to PDF with A4/Letter format selection
      /specl-take ELF-7777
      /specl-take https://tango.atlassian.net/browse/ELF-7777
-     /specl-take https://github.com/nexuslabsio/users/issues/42
-     /specl-take https://github.com/nexuslabsio/users/pull/99
-     /specl-take nexuslabsio/users#42
+     /specl-take https://github.com/l2nx/users/issues/42
+     /specl-take https://github.com/l2nx/users/pull/99
+     /specl-take l2nx/users#42
      /specl-take https://gitlab.com/acme/api/-/issues/123
      /specl-take ELF-7777 focus on A4/Letter, skip watermarks
    
@@ -41,7 +41,7 @@ from scratch or appends new requirements to the existing `spec.md` /
     - Any URL (`http://`, `https://`) — not restricted by domain.
     - Jira-style ticket-id: `[A-Z][A-Z0-9_]+-[0-9]+`.
     - GitHub / GitLab short-ref: `<owner>/<repo>#<number>`
-      (e.g., `nexuslabsio/users#42`).
+      (e.g., `l2nx/users#42`).
 
    Fetch order (per URL / ticket-id / short-ref):
 
